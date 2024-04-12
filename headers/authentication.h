@@ -5,6 +5,7 @@
 #include <string.h>
 
 int login=0;
+char Email[50];
 
 void registerCredentials(struct Credentials);
 struct Credentials fetchCredentials(char [50]);
@@ -129,8 +130,9 @@ struct Student loginUser()
     if(strcmp(credential.password,pass)==0)
     {
         login=1;
-        
+        sprintf(Email,credential.email);
         student=fetchData(credential.email);
+
     }
     else
     {

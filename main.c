@@ -48,7 +48,7 @@ void welcomePage()
             printf("\n\nIncorrect password!\nRedirecting to Welcomepage\n");
             
             pause(2);
-            system("cls");
+            
 
             welcomePage();
         }
@@ -72,50 +72,72 @@ void homePage()
         {
             printf("You can't issue more than 5 books at a time.\nReturn a book before issuing another\n");
         }
+        
+        initializeBooks();
+
+        struct Book bookIssued[10];
+        readLibraryFromFile(bookIssued,sizeof(bookIssued) / sizeof(bookIssued[0]));
+
+        printBooks(bookIssued,sizeof(bookIssued) / sizeof(bookIssued[0]));
+
+        int issuebook =0;
+        printf("enter the book you want to be issued : ");
+
+        scanf("%d",&issuebook);
+        addToIssuedBook(bookIssued[issuebook-1],Email);
+        
+        printf("\nbook issued succesfull\nRedirecting to Homepage\n");
+        pause(2);
+        system("cls");
+        homePage();
+
     }
     else if(choice==2)
-    {
-        for(int i=0;i<=student.nBooks;i++)
-        {
-            printf("Book:-%s Author:-%s Issued Date:-%s Due Date:-%s",student.bookIssued[i].name,student.bookIssued[i].author,formatDate(student.bookIssued[i].issueDate),formatDate(student.bookIssued[i].dueDate));
+    {   int temp;
+        printIssuedBooks(Email);
+        printf("\npress 1 to go back : ");
+        scanf("%d",&temp);
+        if(temp==1){
+            system("cls");
+            homePage();
         }
     }
     else if(choice==3)
-    {
-        printf("Enter the book number to return:-\n");
-        for(int i=0;i<=student.nBooks;i++)
-        {
-            printf("%d. Book:-%s Author:-%s Issued Date:-%s Due Date:-%s",i+1,student.bookIssued[i].name,student.bookIssued[i].author,formatDate(student.bookIssued[i].issueDate),formatDate(student.bookIssued[i].dueDate));
-        }
+    {   int temp;
+        printIssuedBooks(Email);
+        printf("\nEnter the book number to return:-\n");
+        int book_number;
+        scanf("%d",&book_number);
+
+        return_book(book_number);
+        
     }
     else if(choice==4)
-    {
-        for(int i=0;i<=student.nMessages;i++)
-        {
-            printf("Message%d",i+1);
-            printf("%s",student.messages[i]);
-            strcpy(student.messages[i],NULL);
+    {   int temp;
+        printMessage(Email);
+
+        printf("\npress 1 to go back : ");
+        scanf("%d",&temp);
+        if(temp==1){
+             system("cls");
+            homePage();
         }
     }
     else
     {
         printf("Invalid Choice!\n");
 
-        pause(2);
+        
         clear();
-
-        homePage();
+       
+        
     }
 }
 
 int main()
 {
-    // welcomePage();
+    welcomePage();
 
-    // initializeBooks();
-
-    struct Book bookIssued[10];
-    readLibraryFromFile(bookIssued,sizeof(bookIssued) / sizeof(bookIssued[0]));
-
-    printBooks(bookIssued,sizeof(bookIssued) / sizeof(bookIssued[0]));
+    
 }
+//aa_aa@iitp.ac.in

@@ -49,7 +49,77 @@ void printBooks(struct Book books[],int len)
 {
     for(int i=0;i<len;i++)
     {
-        printf("Book:-%s Author:-%s Issued Date:-%s Due Date:-%s",books[i].name,books[i].author,formatDate(books[i].issueDate),formatDate(books[i].dueDate));
+        printf("Book %d:-%s Author:-%s",i+1,books[i].name,books[i].author);
         printf("\n\n");
     }
 }
+
+void addToIssuedBook(struct Book bookIssued,char mail[50]){
+    FILE *file;
+
+        char fileName[50] = "";
+        
+        char book_issue_data[150] = "";
+        
+        sprintf(fileName, "book-issue-data/%s.txt", Email);
+        sprintf(book_issue_data,"Book :-%s Author:-%s Issued Date:-%s Due Date:-%s",bookIssued.name,bookIssued.author,formatDate(bookIssued.issueDate),formatDate(bookIssued.dueDate));
+        book_issue_data[149]='\n';
+
+        file = fopen(fileName, "a+");
+    
+        fwrite(book_issue_data, sizeof(book_issue_data), 1, file);
+        fclose(file);
+}
+
+void printIssuedBooks(char mail[50]){
+    
+        FILE *file;
+        char fileName[50] = "";
+        
+        sprintf(fileName, "book-issue-data/%s.txt", Email);
+        file = fopen(fileName, "r");
+        char c = fgetc(file);
+
+        while (c != EOF) 
+        {  
+            printf ("%c", c);  
+            c = fgetc(file); 
+        } 
+}
+
+
+
+void return_book(int book_number){
+    
+    FILE *file;
+    char fileName[50] = "";
+        
+        sprintf(fileName, "book-issue-data/%s.txt", Email);
+        
+}
+
+void printMessage(char mail[]){
+
+
+    FILE *file;
+    char fileName[50] = "";
+        
+        sprintf(fileName, "message/%s.txt", Email);
+
+        file = fopen(fileName, "a+");
+        char c = fgetc(file);
+
+        if(c==EOF){
+            printf("you have no messages\n");
+        }else{
+            while (c != EOF) 
+                { 
+                    printf ("%c", c); 
+                    c = fgetc(file); 
+                } printf("\n");
+        }
+
+
+}
+
+
