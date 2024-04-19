@@ -94,15 +94,9 @@ void homePage()
         {
             if(student.nBooks<5)
             {
-                printf("The lists of book that you can issue are:-\n");
+                               
 
-                printBooks();                
-
-                int issueBook=0;
-                printf("Enter the book number you want to issue: ");
-                scanf("%d",&issueBook);
-
-                addToIssuedBook(issueBook);
+                addToIssuedBook();
                 
                 printf("\n\nBook issued succesfully\n");
             }
@@ -122,13 +116,13 @@ void homePage()
         {
             printIssuedBooks(Email);//prints all issued books of the corresponding email id
             
-            printf("%d\n",student.nBooks);//---->debug
+            printf("Total books issued :- %d\n",student.nBooks);//---->debug
 
             return_back();//awaits till user's response with "1"
         }
         else if(choice==3)
         {
-            printIssuedBooks(Email);
+            
 
             return_book();//calls method to return the book
 
@@ -195,11 +189,8 @@ void homePage()
         {
             printBooks();//prints all the lists of books available
 
-            int book_number;
-            printf("Book number you want to delete: ");
-            scanf("%d",&book_number);
-
-            remove_book(book_number);//removes the book from the library stock of the given book number
+            
+            remove_book();//removes the book from the library stock of the given book number
 
             return_back();
         }
