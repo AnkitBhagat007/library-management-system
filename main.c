@@ -63,6 +63,7 @@ void welcomePage()
 
             char fileName[50];
             sprintf(fileName, "students-data/%s.bin",Email);
+
             student=fetchData(fileName);
             admin=fetchData("students-data/admin_admin@iitp.ac.in.bin");
         }
@@ -94,15 +95,9 @@ void homePage()
         {
             if(student.nBooks<5)
             {
-                printf("The lists of book that you can issue are:-\n");
+                               
 
-                printBooks();                
-
-                int issueBook=0;
-                printf("Enter the book number you want to issue: ");
-                scanf("%d",&issueBook);
-
-                addToIssuedBook(issueBook);
+                addToIssuedBook();
                 
                 printf("\n\nBook issued succesfully\n");
             }
@@ -122,13 +117,13 @@ void homePage()
         {
             printIssuedBooks(Email);//prints all issued books of the corresponding email id
             
-            printf("%d\n",student.nBooks);//---->debug
+            printf("Total books issued :- %d\n",student.nBooks);//---->debug
 
             return_back();//awaits till user's response with "1"
         }
         else if(choice==3)
         {
-            printIssuedBooks(Email);
+            
 
             return_book();//calls method to return the book
 
@@ -185,21 +180,12 @@ void homePage()
             
             return_back();
         }
-        // else if(choice==2)
-        // {            
-        //     sendMail();//sends mails to the library customers
-
-        //     return_back();      
-        // }
         else if(choice==2)
         {
             printBooks();//prints all the lists of books available
 
-            int book_number;
-            printf("Book number you want to delete: ");
-            scanf("%d",&book_number);
-
-            remove_book(book_number);//removes the book from the library stock of the given book number
+            
+            remove_book();//removes the book from the library stock of the given book number
 
             return_back();
         }
